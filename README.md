@@ -5,7 +5,7 @@
 ## Usage
 
 * Lib: React v
-* Lang: Typescript v4.0.5
+* Lang: Typescript v4.1.3
 * API: GraphQL
 
 ## Development
