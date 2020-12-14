@@ -4,7 +4,7 @@
 
 ## Usage
 
-* Lib: React v
+* Lib: React v17.0.1
 * Lang: Typescript v4.1.3
 * API: GraphQL
 
