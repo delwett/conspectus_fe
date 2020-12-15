@@ -1,8 +1,7 @@
-const { resolve } = require('path');
-const { HotModuleReplacementPlugin } = require('webpack');
+const { resolve } = require('path')
+const { HotModuleReplacementPlugin } = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const webpack = require('webpack');
 
 require('dotenv').config()
 
@@ -23,7 +22,7 @@ module.exports = {
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: 'babel-loader'
       },
       {
         test: /\.css$/i,
@@ -48,8 +47,10 @@ module.exports = {
       chunks: 'all'
     },
     minimize: true,
-    minimizer: [new TerserPlugin({
-      extractComments: false
-    })],
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false
+      })
+    ]
   }
-};
+}

@@ -1,0 +1,39 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "project": "./tsconfig.json",
+    "createDefaultProgram": true
+  },
+  "plugins": [
+    "@typescript-eslint", 
+    "import",
+    "promise",
+    "prettier"
+  ],
+  "extends": [
+    "plugin:prettier/recommended",
+    "standard",
+    "standard-with-typescript",
+    "standard-react",
+    "standard-jsx",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/standard",
+    "prettier/react"
+  ],
+  "rules": {
+    "prettier/prettier": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/strict-boolean-expressions": 0, 
+        "@typescript-eslint/consistent-type-definitions": 0,
+        "@typescript-eslint/return-await": 0
+      }
+    }
+  ]
+}
