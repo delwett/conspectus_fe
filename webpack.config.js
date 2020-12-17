@@ -2,10 +2,14 @@ const { resolve } = require('path')
 const { HotModuleReplacementPlugin } = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 require('dotenv').config()
 
+const isNodeEnvProd = process.env.NODE_ENV === 'production'
+
 module.exports = {
+  mode: isNodeEnvProd ? 'production' : 'development',
   entry: resolve(__dirname, 'src', 'index.tsx'),
   output: {
     path: resolve(__dirname, 'dist'),
@@ -22,17 +26,30 @@ module.exports = {
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        use: ['babel-loader', '@linaria/webpack5-loader']
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.(jpg|png|ttf)$/i,
+        use: {
+          loader: 'url-loader',
+          options: {
+            name: 'assets/[name].[ext]'
+          }
+        }
       }
     ]
   },
   devServer: {
     port: 3000,
-    hotOnly: true,
     historyApiFallback: true
   },
   plugins: [
@@ -40,6 +57,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: resolve(__dirname, 'src', 'index.html')
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'assets/styles.css'
     })
   ],
   optimization: {

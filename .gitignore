@@ -6,3 +6,5 @@ dist
 
 # Environments
 .env
+
+.linaria-cache
