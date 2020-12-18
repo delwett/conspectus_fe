@@ -1,6 +1,5 @@
 import { css } from '@linaria/core'
 import { normalize } from 'polished'
-import { white } from '@/theme/colors'
 import RobotoRegular from '@/fonts/Roboto-Regular.ttf'
 import RobotoMedium from '@/fonts/Roboto-Medium.ttf'
 
@@ -13,7 +12,7 @@ export const globals = css`
       font-family: 'Roboto', sans-serif;
       font-weight: 400;
       line-height: normal;
-      background: ${white};
+      background: '#ffffff';
       font-size: 10px;
       box-sizing: border-box;
     }

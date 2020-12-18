@@ -1,10 +1,11 @@
 import React, { StrictMode } from 'react'
 import { render } from 'react-dom'
+import App from '@/containers/App'
 import './global-styles'
 
 render(
   <StrictMode>
-    <div>123</div>
+    <App />
   </StrictMode>,
   document.body.querySelector('#app-root')
 )
