@@ -1,4 +1,4 @@
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core'
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles'
 import { blue, deepPurple } from '@material-ui/core/colors'
 
 const theme = createMuiTheme({

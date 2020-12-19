@@ -1,12 +1,19 @@
 import React, { ReactElement, ReactNode } from 'react'
-import { Container } from './styles'
+import Header from './components/Header'
+import { Container, Body } from './styles'
 
 type LayoutProps = {
+  isAuthorized: boolean
   children: ReactNode
 }
 
 export default function Layout(props: LayoutProps): ReactElement {
-  const { children } = props
+  const { children, isAuthorized } = props
 
-  return <Container>{children}</Container>
+  return (
+    <Container>
+      {isAuthorized ? null : <Header />}
+      <Body>{children}</Body>
+    </Container>
+  )
 }

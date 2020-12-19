@@ -5,7 +5,7 @@ import NotFound from '@/scenes/NotFound'
 
 export default function RootScene(): ReactElement {
   return (
-    <Layout>
+    <Layout isAuthorized={false}>
       <Suspense fallback={null}>
         <Switch>
           <Redirect exact from="/" to="/board" />

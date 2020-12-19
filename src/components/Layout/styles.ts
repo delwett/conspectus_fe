@@ -6,3 +6,9 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 `
+
+export const Body = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+`
