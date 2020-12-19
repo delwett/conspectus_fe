@@ -1,6 +1,7 @@
 import React, { Suspense, ReactElement } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import Layout from '@/components/Layout'
+import Login from '@/scenes/Login'
 import NotFound from '@/scenes/NotFound'
 
 export default function RootScene(): ReactElement {
@@ -12,9 +13,7 @@ export default function RootScene(): ReactElement {
           <Route path="/board">
             <div>board</div>
           </Route>
-          <Route path="/login">
-            <div>login</div>
-          </Route>
+          <Route path="/login" component={Login} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Suspense>

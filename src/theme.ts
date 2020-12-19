@@ -8,9 +8,6 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: deepPurple['500']
-    },
-    background: {
-      default: '#fffff'
     }
   },
   typography: {

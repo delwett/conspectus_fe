@@ -27,6 +27,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.6",
+    "@types/validator": "^13.1.1",
     "@typescript-eslint/eslint-plugin": "^4.10.0",
     "@typescript-eslint/parser": "^4.10.0",
     "babel-loader": "^8.2.2",
@@ -62,11 +63,14 @@
     "@material-ui/icons": "^4.11.2",
     "core-js": "^3.8.1",
     "dotenv": "^8.2.0",
+    "final-form": "^4.20.1",
     "notistack": "^1.0.2",
     "polished": "^4.0.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0"
+    "react-final-form": "^6.5.2",
+    "react-router-dom": "^5.2.0",
+    "validator": "^13.5.2"
   },
   "resolutions": {
     "tapable": "^2.1.1"
