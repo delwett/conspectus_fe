@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react'
 import { BrowserRouter } from 'react-router-dom'
+import { SnackbarProvider } from 'notistack'
 import { StylesProvider, ThemeProvider } from '@material-ui/core/styles'
 import RootScene from '@/scenes'
 import theme from '@/theme'
@@ -9,7 +10,9 @@ export default function App(): ReactElement {
     <BrowserRouter>
       <StylesProvider injectFirst>
         <ThemeProvider theme={theme}>
-          <RootScene />
+          <SnackbarProvider maxSnack={4}>
+            <RootScene />
+          </SnackbarProvider>
         </ThemeProvider>
       </StylesProvider>
     </BrowserRouter>

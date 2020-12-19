@@ -8,3 +8,4 @@ dist
 .env
 
 .linaria-cache
+yarn-error.log

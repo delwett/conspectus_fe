@@ -15,8 +15,11 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: '"Roboto", sans-serif',
-    htmlFontSize: 10
+    htmlFontSize: 10,
+    fontSize: 16
   }
 })
+
+export const breakpoints = theme.breakpoints
 
 export default responsiveFontSizes(theme)

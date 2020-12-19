@@ -1,5 +1,6 @@
 import React, { ReactElement, ReactNode } from 'react'
 import Header from './components/Header'
+import AuthorizedHeader from './components/AuthorizedHeader'
 import { Container, Body } from './styles'
 
 type LayoutProps = {
@@ -12,7 +13,7 @@ export default function Layout(props: LayoutProps): ReactElement {
 
   return (
     <Container>
-      {isAuthorized ? null : <Header />}
+      {isAuthorized ? <AuthorizedHeader /> : <Header />}
       <Body>{children}</Body>
     </Container>
   )
