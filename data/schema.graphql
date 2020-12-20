@@ -1,0 +1,120 @@
+type Query {
+  getCurrentUser: User
+  getUsers: [User]
+  getCurrentBoard: Board
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String
+  email: String!
+}
+
+type Board {
+  id: ID!
+  meetingDate: Date!
+  tasks: [Task]
+}
+
+# A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+scalar Date
+
+type Task {
+  id: ID!
+  description: String!
+  subtasks: [Task]
+  comments: [Comment]
+  status: TaskStatusEnum
+}
+
+type Comment {
+  id: ID!
+  text: String!
+}
+
+enum TaskStatusEnum {
+  IN_PROGRESS
+  COMPLETED
+}
+
+type Mutation {
+  login(loginInput: LoginInput): AuthToken
+  logout: Boolean
+  createUser(createUserInput: CreateUserInput): User
+  deleteUser(deleteUserInput: DeleteUserInput): Boolean
+  updateUser(updateUserInput: UpdateUserInput): User
+  updatePassword(updatePasswordInput: UpdatePasswordInput): AuthToken
+  completeMeeting: Boolean
+  updateMeetingDate(updateMeetingDateInput: UpdateMeetingDateInput): Board
+  createTask(createTaskInput: CreateTaskInput): Task
+  deleteTask(deleteTaskInput: DeleteTaskInput): Boolean
+  updateTaskStatus(updateTaskStatusInput: UpdateTaskStatusInput): [Task]
+  updateTaskDescription(
+    updateTaskDescriptionInput: UpdateTaskDescriptionInput
+  ): Task
+  updateTaskParent(updateTaskParentInput: UpdateTaskParentInput): Task
+  createComment(createCommentInput: CreateCommentInput): Comment
+}
+
+scalar AuthToken
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input CreateUserInput {
+  firstName: String!
+  lastName: String
+  email: String!
+  password: String!
+}
+
+input DeleteUserInput {
+  id: ID!
+}
+
+input UpdateUserInput {
+  firstName: String!
+  lastName: String
+  email: String!
+}
+
+input UpdatePasswordInput {
+  oldPassword: String!
+  newPassword: String!
+}
+
+input UpdateMeetingDateInput {
+  date: Date!
+}
+
+input CreateTaskInput {
+  parentId: ID
+  description: String!
+}
+
+input DeleteTaskInput {
+  id: ID!
+}
+
+input UpdateTaskStatusInput {
+  id: ID!
+  status: TaskStatusEnum!
+}
+
+input UpdateTaskDescriptionInput {
+  id: ID!
+  description: String!
+}
+
+input UpdateTaskParentInput {
+  id: ID!
+  parentId: String
+}
+
+input CreateCommentInput {
+  taskId: ID!
+  text: String!
+}

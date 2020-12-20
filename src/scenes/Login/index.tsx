@@ -1,11 +1,28 @@
 import React, { ReactElement, useCallback } from 'react'
-import SignInForm from './components/SignInForm'
+import { graphql } from 'react-relay'
+import { useMutation } from 'relay-hooks'
+import asErrorMessage from '@/api/utils/as-error-message'
+import useToasts from '@/hooks/useToast'
+import type { LoginMutation } from './__generated__/LoginMutation.graphql'
+import SignInForm, { FormValues } from './components/SignInForm'
 import { Container, Card, Typography } from './styles'
 
 export default function Login(): ReactElement {
-  const handleSubmit = useCallback(async () => {
-    new Promise(resolve => resolve(undefined)).catch(undefined)
-  }, [])
+  const [login] = useMutation<LoginMutation>(loginMutation)
+  const { showToast } = useToasts()
+
+  const handleSubmit = useCallback(
+    async (values: FormValues) => {
+      await login({
+        variables: { input: values },
+        onError: error => showToast(asErrorMessage(error), { variant: 'error' }),
+        onCompleted: respose => {
+          console.log({ respose })
+        }
+      })
+    },
+    [login, showToast]
+  )
 
   return (
     <Container maxWidth="sm">
@@ -21,3 +38,9 @@ export default function Login(): ReactElement {
     </Container>
   )
 }
+
+const loginMutation = graphql`
+  mutation LoginMutation($input: LoginInput!) {
+    login(loginInput: $input)
+  }
+`

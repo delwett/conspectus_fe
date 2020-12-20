@@ -5,7 +5,7 @@ import { required, email } from '@/utils/final-form/validators'
 import { password } from '@/utils/final-form/parsers'
 import { Form, FormInput, SubmitButton } from './styles'
 
-type FormValues = {
+export type FormValues = {
   email: string
   password: string
 }
