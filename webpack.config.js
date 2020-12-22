@@ -1,5 +1,6 @@
 const { resolve } = require('path')
 const { HotModuleReplacementPlugin } = require('webpack')
+const { removeEmpty } = require('webpack-config-utils')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -58,15 +59,19 @@ module.exports = {
     })
   ],
   optimization: {
-    usedExports: true,
-    splitChunks: {
-      chunks: 'all'
-    },
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        extractComments: false
-      })
-    ]
+    usedExports: isNodeEnvProd,
+    splitChunks: isNodeEnvProd
+      ? {
+          chunks: 'all'
+        }
+      : false,
+    minimize: isNodeEnvProd,
+    minimizer: removeEmpty([
+      isNodeEnvProd
+        ? new TerserPlugin({
+            extractComments: false
+          })
+        : undefined
+    ])
   }
 }

@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit --pretty --project .",
     "lint": "eslint --ext .js,.ts,.tsx .",
     "test": "yarn typecheck && yarn lint",
-    "relay": "relay-compiler --language typescript --src ./src --schema ./data/schema.graphql --extensions ts tsx"
+    "relay": "relay-compiler --language typescript --src ./src --schema ./src/api/schema.graphql --extensions ts tsx --artifactDirectory ./src/__generated__"
   },
   "engines": {
     "node": "14.x",
@@ -61,6 +61,7 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.10.1",
     "webpack-cli": "^4.2.0",
+    "webpack-config-utils": "^2.3.1",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {

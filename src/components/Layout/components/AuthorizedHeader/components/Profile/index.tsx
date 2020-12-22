@@ -1,13 +1,22 @@
 import React, { ReactElement, useCallback, useState } from 'react'
-import { Box, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, useMediaQuery } from '@material-ui/core'
+import {
+  Box,
+  CircularProgress,
+  IconButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  useMediaQuery
+} from '@material-ui/core'
 import { Edit, VpnKey, Person } from '@material-ui/icons'
 import { breakpoints } from '@/theme'
 import useToasts from '@/hooks/useToast'
+import useActiveUser from '@/hooks/useActiveUser'
 import { Button } from './styles'
 
 export default function Profile(): ReactElement {
-  // TODO: API
-  const userName = 'Dmitriy'
+  // const { user, loading } = useActiveUser()
 
   const afterSmall = useMediaQuery(breakpoints.up('sm'))
   const { showToast } = useToasts()
@@ -27,11 +36,13 @@ export default function Profile(): ReactElement {
     setMenuAnchor(null)
   }, [showToast])
 
+  if (false) return <CircularProgress color="inherit" size="20px" />
+
   return (
     <Box>
       {afterSmall ? (
         <Button aria-haspopup="true" color="inherit" size="large" onClick={handleButtonClick}>
-          Hi, {userName}
+          {/* Hi, {user?.firstName ?? ''} */}
         </Button>
       ) : (
         <IconButton aria-label="profile" aria-haspopup="true" color="inherit" onClick={handleButtonClick}>
