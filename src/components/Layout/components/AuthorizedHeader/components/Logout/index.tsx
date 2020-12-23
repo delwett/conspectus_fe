@@ -11,7 +11,8 @@ import useActiveUser from '@/hooks/useActiveUser'
 export default function Logout(): ReactElement {
   const [logout, { loading }] = useMutation<LogoutMutation>(logoutMutation)
   const { showToast } = useToasts()
-  const { retry } = useActiveUser()
+  const { activeUser } = useActiveUser()
+  const userId = activeUser?.id
 
   const handleClick = useCallback(async () => {
     if (!getToken()) return
@@ -23,10 +24,12 @@ export default function Logout(): ReactElement {
       },
       onCompleted: () => {
         deleteToken()
-        retry()
+      },
+      updater: store => {
+        if (userId) store.delete(userId)
       }
     })
-  }, [logout, retry, showToast])
+  }, [logout, showToast, userId])
 
   return (
     <IconButton aria-label="logout" color="inherit" disabled={loading} onClick={handleClick}>

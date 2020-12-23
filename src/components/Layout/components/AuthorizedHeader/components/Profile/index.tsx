@@ -16,7 +16,7 @@ import useActiveUser from '@/hooks/useActiveUser'
 import { Button } from './styles'
 
 export default function Profile(): ReactElement {
-  // const { user, loading } = useActiveUser()
+  const { activeUser, loading } = useActiveUser()
 
   const afterSmall = useMediaQuery(breakpoints.up('sm'))
   const { showToast } = useToasts()
@@ -36,13 +36,13 @@ export default function Profile(): ReactElement {
     setMenuAnchor(null)
   }, [showToast])
 
-  if (false) return <CircularProgress color="inherit" size="20px" />
+  if (loading) return <CircularProgress color="inherit" size="20px" />
 
   return (
     <Box>
       {afterSmall ? (
         <Button aria-haspopup="true" color="inherit" size="large" onClick={handleButtonClick}>
-          {/* Hi, {user?.firstName ?? ''} */}
+          Hi, {activeUser?.firstName ?? ''}
         </Button>
       ) : (
         <IconButton aria-label="profile" aria-haspopup="true" color="inherit" onClick={handleButtonClick}>

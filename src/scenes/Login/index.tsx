@@ -1,27 +1,35 @@
 import React, { ReactElement, useCallback } from 'react'
 import { graphql } from 'react-relay'
 import { useMutation } from 'relay-hooks'
+import type { LoginMutation } from '@/__generated__/LoginMutation.graphql'
 import asErrorMessage from '@/api/utils/as-error-message'
+import { setToken } from '@/utils/auth-tokens'
+import useActiveUser from '@/hooks/useActiveUser'
 import useToasts from '@/hooks/useToast'
-import type { LoginMutation } from './__generated__/LoginMutation.graphql'
 import SignInForm, { FormValues } from './components/SignInForm'
 import { Container, Card, Typography } from './styles'
 
 export default function Login(): ReactElement {
   const [login] = useMutation<LoginMutation>(loginMutation)
+  const { retry } = useActiveUser()
   const { showToast } = useToasts()
 
   const handleSubmit = useCallback(
     async (values: FormValues) => {
       await login({
-        variables: { input: values },
-        onError: error => showToast(asErrorMessage(error), { variant: 'error' }),
-        onCompleted: respose => {
-          console.log({ respose })
+        variables: {
+          input: values
+        },
+        onError: error => {
+          showToast(asErrorMessage(error), { variant: 'error' })
+        },
+        onCompleted: response => {
+          setToken(String(response.login))
+          retry()
         }
       })
     },
-    [login, showToast]
+    [login, retry, showToast]
   )
 
   return (
