@@ -1,6 +1,6 @@
 type Query {
   getCurrentUser: User
-  getUsers: [User]
+  getUsers: [User!]
   getCurrentBoard: Board
 }
 

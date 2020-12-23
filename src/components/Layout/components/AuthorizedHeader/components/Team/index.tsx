@@ -3,6 +3,7 @@ import { Box, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, useMediaQu
 import { Add, List, People } from '@material-ui/icons'
 import { breakpoints } from '@/theme'
 import useToasts from '@/hooks/useToast'
+import UsersListModal from './components/UsersListModal'
 import { Button } from './styles'
 
 export default function Team(): ReactElement {
@@ -10,6 +11,8 @@ export default function Team(): ReactElement {
   const { showToast } = useToasts()
 
   const [$menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null)
+
+  const [isUsersListModalOpen, setUsersListModalVisibility] = useState(false)
 
   const handleButtonClick = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setMenuAnchor(event.currentTarget)
@@ -23,6 +26,15 @@ export default function Team(): ReactElement {
     showToast('Under development', { variant: 'warning' })
     setMenuAnchor(null)
   }, [showToast])
+
+  const handleUsersListMenuClick = useCallback(() => {
+    setUsersListModalVisibility(true)
+    setMenuAnchor(null)
+  }, [])
+
+  const handleUsersListModalClose = useCallback(() => {
+    setUsersListModalVisibility(false)
+  }, [])
 
   return (
     <Box>
@@ -56,13 +68,14 @@ export default function Team(): ReactElement {
           </ListItemIcon>
           <ListItemText primary="Add user" />
         </MenuItem>
-        <MenuItem onClick={handleMenuClick}>
+        <MenuItem onClick={handleUsersListMenuClick}>
           <ListItemIcon>
             <List fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Users list" />
         </MenuItem>
       </Menu>
+      <UsersListModal isOpen={isUsersListModalOpen} onClose={handleUsersListModalClose} />
     </Box>
   )
 }

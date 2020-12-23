@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode } from 'react'
-import { ActiveUserProviderQuery } from '@/__generated__/ActiveUserProviderQuery.graphql'
 import { graphql, useQuery } from 'relay-hooks'
+import { ActiveUserProviderQuery } from '@/__generated__/ActiveUserProviderQuery.graphql'
 import ActiveUserContext from './context'
 
 type ActiveUserProviderProps = {
@@ -17,7 +17,7 @@ export default function ActiveUserProvider(props: ActiveUserProviderProps): Reac
 
   const value = {
     activeUser: data?.getCurrentUser ?? null,
-    loading: !error && !props,
+    loading: !error && !data,
     error,
     retry
   }
