@@ -4,22 +4,22 @@
 
 import { ConcreteRequest } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type UsersListModalQueryVariables = {};
-export type UsersListModalQueryResponse = {
+export type UsersListContentQueryVariables = {};
+export type UsersListContentQueryResponse = {
     readonly getUsers: ReadonlyArray<{
         readonly id: string;
         readonly " $fragmentRefs": FragmentRefs<"UserItem_user">;
     }> | null;
 };
-export type UsersListModalQuery = {
-    readonly response: UsersListModalQueryResponse;
-    readonly variables: UsersListModalQueryVariables;
+export type UsersListContentQuery = {
+    readonly response: UsersListContentQueryResponse;
+    readonly variables: UsersListContentQueryVariables;
 };
 
 
 
 /*
-query UsersListModalQuery {
+query UsersListContentQuery {
   getUsers {
     id
     ...UserItem_user
@@ -47,7 +47,7 @@ return {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "UsersListModalQuery",
+    "name": "UsersListContentQuery",
     "selections": [
       {
         "alias": null,
@@ -74,7 +74,7 @@ return {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "UsersListModalQuery",
+    "name": "UsersListContentQuery",
     "selections": [
       {
         "alias": null,
@@ -112,14 +112,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "d4227e66d4ecc84d4db63b730c2bbbe4",
+    "cacheID": "215152710d58dcb4f5c65360f1d77bd5",
     "id": null,
     "metadata": {},
-    "name": "UsersListModalQuery",
+    "name": "UsersListContentQuery",
     "operationKind": "query",
-    "text": "query UsersListModalQuery {\n  getUsers {\n    id\n    ...UserItem_user\n  }\n}\n\nfragment UserItem_user on User {\n  id\n  firstName\n  lastName\n  email\n}\n"
+    "text": "query UsersListContentQuery {\n  getUsers {\n    id\n    ...UserItem_user\n  }\n}\n\nfragment UserItem_user on User {\n  id\n  firstName\n  lastName\n  email\n}\n"
   }
 };
 })();
-(node as any).hash = 'b45e44f63a7d7af9468e87cfc68db3cf';
+(node as any).hash = '64a4916faf392c7ac3dd063dc18440fc';
 export default node;

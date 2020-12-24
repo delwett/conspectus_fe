@@ -1,24 +1,16 @@
 import React, { ReactElement } from 'react'
-import { CircularProgress } from '@material-ui/core'
+import { DialogContent, CircularProgress } from '@material-ui/core'
 import { graphql, useQuery } from 'relay-hooks'
-import type { UsersListModalQuery } from '@/__generated__/UsersListModalQuery.graphql'
+import type { UsersListContentQuery } from '@/__generated__/UsersListContentQuery.graphql'
 import asErrorMessage from '@/api/utils/as-error-message'
 import useToasts from '@/hooks/useToast'
-import Modal from '@/components/Modal'
 import UserItem from './components/UserItem'
 import { List } from './styles'
 
-type UsersListModalProps = {
-  isOpen: boolean
-  onClose: () => void
-}
-
-export default function UsersListModal(props: UsersListModalProps): ReactElement {
-  const { isOpen, onClose } = props
-
+export default function UsersListContent(): ReactElement {
   const { showToast } = useToasts()
 
-  const { props: data, error } = useQuery<UsersListModalQuery>(getUsersList)
+  const { props: data, error } = useQuery<UsersListContentQuery>(getUsersList, {}, { fetchPolicy: 'network-only' })
   const isLoading = !data && !error
   const usersList = data?.getUsers ?? []
 
@@ -27,7 +19,7 @@ export default function UsersListModal(props: UsersListModalProps): ReactElement
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <DialogContent dividers>
       {isLoading ? (
         <CircularProgress />
       ) : (
@@ -37,12 +29,12 @@ export default function UsersListModal(props: UsersListModalProps): ReactElement
           ))}
         </List>
       )}
-    </Modal>
+    </DialogContent>
   )
 }
 
 export const getUsersList = graphql`
-  query UsersListModalQuery {
+  query UsersListContentQuery {
     getUsers {
       id
       ...UserItem_user

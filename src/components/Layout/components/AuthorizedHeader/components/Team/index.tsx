@@ -3,7 +3,8 @@ import { Box, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, useMediaQu
 import { Add, List, People } from '@material-ui/icons'
 import { breakpoints } from '@/theme'
 import useToasts from '@/hooks/useToast'
-import UsersListModal from './components/UsersListModal'
+import Dialog from '@/components/Dialog'
+import UsersListContent from './components/UsersListContent'
 import { Button } from './styles'
 
 export default function Team(): ReactElement {
@@ -75,7 +76,9 @@ export default function Team(): ReactElement {
           <ListItemText primary="Users list" />
         </MenuItem>
       </Menu>
-      <UsersListModal isOpen={isUsersListModalOpen} onClose={handleUsersListModalClose} />
+      <Dialog isOpen={isUsersListModalOpen} title="Users list" onClose={handleUsersListModalClose}>
+        <UsersListContent />
+      </Dialog>
     </Box>
   )
 }

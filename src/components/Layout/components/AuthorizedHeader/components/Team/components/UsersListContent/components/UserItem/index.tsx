@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback } from 'react'
+import React, { ReactElement, useCallback, useState } from 'react'
 import { useFragment, useMutation, graphql } from 'relay-hooks'
 import { IconButton, ListItem, ListItemSecondaryAction, ListItemText } from '@material-ui/core'
 import { Delete } from '@material-ui/icons'
@@ -7,6 +7,7 @@ import type { UserItemDeleteMutation } from '@/__generated__/UserItemDeleteMutat
 import asErrorMessage from '@/api/utils/as-error-message'
 import useToasts from '@/hooks/useToast'
 import useActiveUser from '@/hooks/useActiveUser'
+import ConfirmationDialog from '@/components/ConfirmationDialog'
 
 type UserItemProps = {
   user: UserItem_user$key
@@ -14,6 +15,8 @@ type UserItemProps = {
 
 export default function UserItem(props: UserItemProps): ReactElement {
   const { user } = props
+
+  const [isDialogShown, setDialogVisibiity] = useState(false)
 
   const { id, firstName, lastName, email } = useFragment(userFragment, user)
 
@@ -23,7 +26,7 @@ export default function UserItem(props: UserItemProps): ReactElement {
 
   const isButtonDisabled = id === activeUser?.id || loading
 
-  const handleClick = useCallback(async () => {
+  const handleDeleteConfirm = useCallback(async () => {
     await deleteUser({
       variables: { input: { id } },
       onError: error => {
@@ -41,6 +44,14 @@ export default function UserItem(props: UserItemProps): ReactElement {
     })
   }, [deleteUser, id, showToast])
 
+  const handleDeleteRequest = useCallback(() => {
+    setDialogVisibiity(true)
+  }, [])
+
+  const handleDialogClose = useCallback(() => {
+    setDialogVisibiity(false)
+  }, [])
+
   return (
     <ListItem>
       <ListItemText
@@ -50,10 +61,18 @@ export default function UserItem(props: UserItemProps): ReactElement {
         secondaryTypographyProps={{ noWrap: true, title: email }}
       />
       <ListItemSecondaryAction>
-        <IconButton edge="end" aria-label="delete" disabled={isButtonDisabled} onClick={handleClick}>
+        <IconButton edge="end" aria-label="delete" disabled={isButtonDisabled} onClick={handleDeleteRequest}>
           <Delete color={isButtonDisabled ? 'inherit' : 'error'} />
         </IconButton>
       </ListItemSecondaryAction>
+      <ConfirmationDialog
+        title="Are you sure?"
+        isOpen={isDialogShown}
+        onConfirm={handleDeleteConfirm}
+        onClose={handleDialogClose}
+      >
+        Do you want to delete user?
+      </ConfirmationDialog>
     </ListItem>
   )
 }
