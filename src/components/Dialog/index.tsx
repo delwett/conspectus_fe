@@ -1,6 +1,6 @@
 import React, { forwardRef, ReactElement, ReactNode, Ref } from 'react'
 import type { TransitionProps } from '@material-ui/core/transitions/transition'
-import { Fade, Backdrop, Dialog as DialogBase, DialogProps as DialogPropsBase, Typography } from '@material-ui/core'
+import { Dialog as DialogBase, Fade, Backdrop, DialogProps as DialogPropsBase, Typography } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 import { DialogTitle, IconButton } from './styles'
 
@@ -18,6 +18,7 @@ export default function Dialog(props: DialogProps): ReactElement {
   return (
     <DialogBase
       open={isOpen}
+      fullWidth
       onClose={onClose}
       closeAfterTransition
       BackdropComponent={Backdrop}

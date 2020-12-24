@@ -12,3 +12,10 @@ export function required(message: Message = 'Please fill it'): FieldValidator<an
 export function email(message: Message = 'Email is incorrect'): FieldValidator<string | undefined> {
   return value => (value && !validate.isEmail(value) ? message : undefined)
 }
+
+export function minLength(
+  minLength: number,
+  message: Message = 'Entered value too short'
+): FieldValidator<string | undefined> {
+  return value => (value && typeof value === 'string' && value.length < minLength ? message : undefined)
+}

@@ -8,6 +8,7 @@ export const DialogTitle = styled(DialogTitleBase)`
 
   & > * {
     display: flex;
+    align-items: center;
   }
 `
 

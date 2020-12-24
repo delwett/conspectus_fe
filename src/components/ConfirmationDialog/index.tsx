@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react'
-import { DialogActions, Button, DialogContentText } from '@material-ui/core'
+import { DialogActions, Button, DialogContent, DialogContentText } from '@material-ui/core'
 import Dialog, { DialogProps } from '@/components/Dialog'
-import { DialogContent } from './styles'
 
 interface ConfirmationDialogProps extends DialogProps {
   confirmText?: string
@@ -13,7 +12,7 @@ export default function ConfirmationDialog(props: ConfirmationDialogProps): Reac
   const { children, confirmText = 'Confirm', isConfirmDisabled = false, onClose, onConfirm = onClose, ...rest } = props
 
   return (
-    <Dialog onClose={onClose} {...rest} hideCloseIcon>
+    <Dialog maxWidth="xs" onClose={onClose} {...rest} hideCloseIcon>
       <DialogContent>
         <DialogContentText gutterBottom={false}>{children}</DialogContentText>
       </DialogContent>

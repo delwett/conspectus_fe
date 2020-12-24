@@ -2,18 +2,18 @@ import React, { ReactElement, useCallback, useState } from 'react'
 import { Box, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, useMediaQuery } from '@material-ui/core'
 import { Add, List, People } from '@material-ui/icons'
 import { breakpoints } from '@/theme'
-import useToasts from '@/hooks/useToast'
 import Dialog from '@/components/Dialog'
+import InviteUserContent from './components/InviteUserContent'
 import UsersListContent from './components/UsersListContent'
 import { Button } from './styles'
 
 export default function Team(): ReactElement {
   const afterSmall = useMediaQuery(breakpoints.up('sm'))
-  const { showToast } = useToasts()
 
   const [$menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null)
 
-  const [isUsersListModalOpen, setUsersListModalVisibility] = useState(false)
+  const [isUsersListDialogOpen, setUsersListDialogVisibility] = useState(false)
+  const [isAddUserDialogOpen, setAddUserDialogVisibility] = useState(false)
 
   const handleButtonClick = useCallback((event: React.MouseEvent<HTMLElement>) => {
     setMenuAnchor(event.currentTarget)
@@ -23,18 +23,19 @@ export default function Team(): ReactElement {
     setMenuAnchor(null)
   }, [])
 
-  const handleMenuClick = useCallback(() => {
-    showToast('Under development', { variant: 'warning' })
-    setMenuAnchor(null)
-  }, [showToast])
-
-  const handleUsersListMenuClick = useCallback(() => {
-    setUsersListModalVisibility(true)
+  const handleAddUserMenuClick = useCallback(() => {
+    setAddUserDialogVisibility(true)
     setMenuAnchor(null)
   }, [])
 
-  const handleUsersListModalClose = useCallback(() => {
-    setUsersListModalVisibility(false)
+  const handleUsersListMenuClick = useCallback(() => {
+    setUsersListDialogVisibility(true)
+    setMenuAnchor(null)
+  }, [])
+
+  const handleDialogClose = useCallback(() => {
+    setAddUserDialogVisibility(false)
+    setUsersListDialogVisibility(false)
   }, [])
 
   return (
@@ -63,7 +64,7 @@ export default function Team(): ReactElement {
         getContentAnchorEl={null}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleMenuClick}>
+        <MenuItem onClick={handleAddUserMenuClick}>
           <ListItemIcon>
             <Add fontSize="small" />
           </ListItemIcon>
@@ -76,7 +77,10 @@ export default function Team(): ReactElement {
           <ListItemText primary="Users list" />
         </MenuItem>
       </Menu>
-      <Dialog isOpen={isUsersListModalOpen} title="Users list" onClose={handleUsersListModalClose}>
+      <Dialog isOpen={isAddUserDialogOpen} title="Invite user" onClose={handleDialogClose}>
+        <InviteUserContent onInvited={handleDialogClose} />
+      </Dialog>
+      <Dialog isOpen={isUsersListDialogOpen} title="Users list" onClose={handleDialogClose}>
         <UsersListContent />
       </Dialog>
     </Box>
