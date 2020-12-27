@@ -11,19 +11,19 @@ import {
 } from '@material-ui/core'
 import { Edit, VpnKey, Person } from '@material-ui/icons'
 import { breakpoints } from '@/theme'
-import useToasts from '@/hooks/useToast'
 import useActiveUser from '@/hooks/useActiveUser'
 import Dialog from '@/components/Dialog'
 import UpdateProfileContent from './components/UpdateProfileContent'
+import ChangePasswordContent from './components/ChangePasswordContent'
 import { Button } from './styles'
 
 export default function Profile(): ReactElement {
   const { activeUser, loading } = useActiveUser()
 
   const [isUpdateProfileDialogOpen, setUpdateProfileDialogVisibility] = useState(false)
+  const [isChangePasswordDialogOpen, setChangePasswordDialogVisibility] = useState(false)
 
   const afterSmall = useMediaQuery(breakpoints.up('sm'))
-  const { showToast } = useToasts()
 
   const [$menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null)
 
@@ -35,10 +35,10 @@ export default function Profile(): ReactElement {
     setMenuAnchor(null)
   }, [])
 
-  const handleMenuClick = useCallback(() => {
-    showToast('Under development', { variant: 'warning' })
+  const handlePasswordChangeClick = useCallback(() => {
+    setChangePasswordDialogVisibility(true)
     setMenuAnchor(null)
-  }, [showToast])
+  }, [])
 
   const handleUpdateProfileClick = useCallback(() => {
     setUpdateProfileDialogVisibility(true)
@@ -47,6 +47,7 @@ export default function Profile(): ReactElement {
 
   const handleDialogClose = useCallback(() => {
     setUpdateProfileDialogVisibility(false)
+    setChangePasswordDialogVisibility(false)
   }, [])
 
   if (loading) return <CircularProgress color="inherit" size="20px" />
@@ -82,7 +83,7 @@ export default function Profile(): ReactElement {
           </ListItemIcon>
           <ListItemText primary="Edit profile" />
         </MenuItem>
-        <MenuItem onClick={handleMenuClick}>
+        <MenuItem onClick={handlePasswordChangeClick}>
           <ListItemIcon>
             <VpnKey fontSize="small" />
           </ListItemIcon>
@@ -91,6 +92,9 @@ export default function Profile(): ReactElement {
       </Menu>
       <Dialog isOpen={isUpdateProfileDialogOpen} title="Edit profile" onClose={handleDialogClose}>
         <UpdateProfileContent onUpdated={handleDialogClose} />
+      </Dialog>
+      <Dialog isOpen={isChangePasswordDialogOpen} title="Change password" onClose={handleDialogClose}>
+        <ChangePasswordContent onChanged={handleDialogClose} />
       </Dialog>
     </Box>
   )
