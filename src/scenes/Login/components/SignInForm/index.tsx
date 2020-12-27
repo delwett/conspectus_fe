@@ -19,7 +19,7 @@ export default function SignInForm(props: SignInFormProps): ReactElement {
 
   return (
     <FinalForm onSubmit={onSubmit}>
-      {({ handleSubmit, submitting }) => (
+      {({ handleSubmit, submitting, invalid }) => (
         <Form onSubmit={handleSubmit}>
           <Field
             name="email"
@@ -40,7 +40,7 @@ export default function SignInForm(props: SignInFormProps): ReactElement {
             validate={required()}
             parse={password}
           />
-          <SubmitButton type="submit" variant="contained" color="primary" disabled={submitting}>
+          <SubmitButton type="submit" variant="contained" color="primary" disabled={submitting || invalid}>
             Sign in
           </SubmitButton>
         </Form>

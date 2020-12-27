@@ -13,10 +13,14 @@ import { Edit, VpnKey, Person } from '@material-ui/icons'
 import { breakpoints } from '@/theme'
 import useToasts from '@/hooks/useToast'
 import useActiveUser from '@/hooks/useActiveUser'
+import Dialog from '@/components/Dialog'
+import UpdateProfileContent from './components/UpdateProfileContent'
 import { Button } from './styles'
 
 export default function Profile(): ReactElement {
   const { activeUser, loading } = useActiveUser()
+
+  const [isUpdateProfileDialogOpen, setUpdateProfileDialogVisibility] = useState(false)
 
   const afterSmall = useMediaQuery(breakpoints.up('sm'))
   const { showToast } = useToasts()
@@ -35,6 +39,15 @@ export default function Profile(): ReactElement {
     showToast('Under development', { variant: 'warning' })
     setMenuAnchor(null)
   }, [showToast])
+
+  const handleUpdateProfileClick = useCallback(() => {
+    setUpdateProfileDialogVisibility(true)
+    setMenuAnchor(null)
+  }, [])
+
+  const handleDialogClose = useCallback(() => {
+    setUpdateProfileDialogVisibility(false)
+  }, [])
 
   if (loading) return <CircularProgress color="inherit" size="20px" />
 
@@ -63,7 +76,7 @@ export default function Profile(): ReactElement {
         getContentAnchorEl={null}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleMenuClick}>
+        <MenuItem onClick={handleUpdateProfileClick}>
           <ListItemIcon>
             <Edit fontSize="small" />
           </ListItemIcon>
@@ -76,6 +89,9 @@ export default function Profile(): ReactElement {
           <ListItemText primary="Change password" />
         </MenuItem>
       </Menu>
+      <Dialog isOpen={isUpdateProfileDialogOpen} title="Edit profile" onClose={handleDialogClose}>
+        <UpdateProfileContent onUpdated={handleDialogClose} />
+      </Dialog>
     </Box>
   )
 }
