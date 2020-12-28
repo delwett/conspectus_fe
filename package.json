@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit --pretty --project .",
     "lint": "eslint --ext .js,.ts,.tsx .",
     "test": "yarn typecheck && yarn lint",
-    "relay": "relay-compiler --language typescript --src ./src --schema ./src/api/schema.graphql --extensions ts tsx --artifactDirectory ./src/__generated__"
+    "relay": "relay-compiler --language typescript --src ./src --schema ./src/api/schema.graphql --extensions ts tsx --artifactDirectory ./src/__generated__ --customScalars.Date=String --customScalars.AuthToken=String"
   },
   "engines": {
     "node": "14.x",
@@ -25,6 +25,7 @@
     "@babel/preset-typescript": "^7.12.7",
     "@linaria/shaker": "^3.0.0-beta.1",
     "@linaria/webpack5-loader": "^3.0.0-beta.1",
+    "@types/date-fns": "^2.6.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-relay": "^7.0.17",
@@ -65,12 +66,15 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@date-io/date-fns": "1.x",
     "@linaria/babel-preset": "^3.0.0-beta.1",
     "@linaria/core": "^3.0.0-beta.1",
     "@linaria/react": "^3.0.0-beta.1",
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/pickers": "^3.2.10",
     "core-js": "^3.8.1",
+    "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
     "final-form": "^4.20.1",
     "notistack": "^1.0.2",

@@ -11,7 +11,7 @@ export type ChangePasswordContentMutationVariables = {
     input: UpdatePasswordInput;
 };
 export type ChangePasswordContentMutationResponse = {
-    readonly updatePassword: unknown | null;
+    readonly updatePassword: string | null;
 };
 export type ChangePasswordContentMutation = {
     readonly response: ChangePasswordContentMutationResponse;

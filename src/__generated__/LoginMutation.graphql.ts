@@ -11,7 +11,7 @@ export type LoginMutationVariables = {
     input: LoginInput;
 };
 export type LoginMutationResponse = {
-    readonly login: unknown | null;
+    readonly login: string | null;
 };
 export type LoginMutation = {
     readonly response: LoginMutationResponse;
