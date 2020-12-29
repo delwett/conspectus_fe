@@ -1,5 +1,5 @@
 import React, { ReactElement, useCallback } from 'react'
-import { isToday } from 'date-fns'
+import { isPast } from 'date-fns'
 import { Button } from '@material-ui/core'
 import { graphql, useFragment, useMutation } from 'relay-hooks'
 import { MeetingControls_board$key } from '@/__generated__/MeetingControls_board.graphql'
@@ -36,7 +36,7 @@ export default function MeetingControls(props: MeetingControlsProps): ReactEleme
     })
   }, [completeMeeting, onCompleted, showToast])
 
-  if (isToday(meetingDate)) {
+  if (isPast(meetingDate)) {
     return (
       <Container>
         <Button color="secondary" variant="contained" size="large" disabled={loading} onClick={handleClick}>

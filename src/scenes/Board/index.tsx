@@ -5,6 +5,7 @@ import { BoardQuery } from '@/__generated__/BoardQuery.graphql'
 import asErrorMessage from '@/api/utils/as-error-message'
 import useToasts from '@/hooks/useToast'
 import MeetingData from './components/MeetingData'
+import TasksList from './components/TasksList'
 import MeetingControls from './components/MeetingControls'
 import { Container } from './styles'
 
@@ -25,6 +26,7 @@ export default function Board(): ReactElement {
       ) : (
         <>
           <MeetingData board={data.getCurrentBoard} />
+          <TasksList board={data.getCurrentBoard} onListChanged={retry} />
           <MeetingControls board={data.getCurrentBoard} onCompleted={retry} />
         </>
       )}
@@ -37,6 +39,7 @@ export const getCurrentBoard = graphql`
     getCurrentBoard {
       id
       ...MeetingData_board
+      ...TasksList_board
       ...MeetingControls_board
     }
   }
