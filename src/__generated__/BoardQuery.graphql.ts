@@ -28,6 +28,13 @@ query BoardQuery {
   }
 }
 
+fragment Comments_task on Task {
+  comments {
+    id
+    text
+  }
+}
+
 fragment MeetingControls_board on Board {
   meetingDate
 }
@@ -40,6 +47,7 @@ fragment Task_task on Task {
   id
   description
   status
+  ...Comments_task
 }
 
 fragment TasksList_board on Board {
@@ -140,6 +148,25 @@ return {
                 "kind": "ScalarField",
                 "name": "status",
                 "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "Comment",
+                "kind": "LinkedField",
+                "name": "comments",
+                "plural": true,
+                "selections": [
+                  (v0/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "text",
+                    "storageKey": null
+                  }
+                ],
+                "storageKey": null
               }
             ],
             "storageKey": null
@@ -150,12 +177,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "d1585be9f618a325e1ca7116d334e785",
+    "cacheID": "518455d7aa2545992a1e0270ca330e44",
     "id": null,
     "metadata": {},
     "name": "BoardQuery",
     "operationKind": "query",
-    "text": "query BoardQuery {\n  getCurrentBoard {\n    id\n    ...MeetingData_board\n    ...TasksList_board\n    ...MeetingControls_board\n  }\n}\n\nfragment MeetingControls_board on Board {\n  meetingDate\n}\n\nfragment MeetingData_board on Board {\n  meetingDate\n}\n\nfragment Task_task on Task {\n  id\n  description\n  status\n}\n\nfragment TasksList_board on Board {\n  tasks {\n    id\n    ...Task_task\n  }\n}\n"
+    "text": "query BoardQuery {\n  getCurrentBoard {\n    id\n    ...MeetingData_board\n    ...TasksList_board\n    ...MeetingControls_board\n  }\n}\n\nfragment Comments_task on Task {\n  comments {\n    id\n    text\n  }\n}\n\nfragment MeetingControls_board on Board {\n  meetingDate\n}\n\nfragment MeetingData_board on Board {\n  meetingDate\n}\n\nfragment Task_task on Task {\n  id\n  description\n  status\n  ...Comments_task\n}\n\nfragment TasksList_board on Board {\n  tasks {\n    id\n    ...Task_task\n  }\n}\n"
   }
 };
 })();

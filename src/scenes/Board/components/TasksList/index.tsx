@@ -34,7 +34,7 @@ export default function TasksList(props: TasksListProps): ReactElement {
         {isCreateTaskOpened ? <CreateTask parentId={null} onCreated={handleCreated} /> : null}
       </NewTask>
       {tasks.map(task => (
-        <Task key={task.id} task={task} />
+        <Task key={task.id} task={task} onListChanged={onListChanged} />
       ))}
     </Container>
   )

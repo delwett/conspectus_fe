@@ -9,6 +9,7 @@ export type Task_task = {
     readonly id: string;
     readonly description: string;
     readonly status: TaskStatusEnum;
+    readonly " $fragmentRefs": FragmentRefs<"Comments_task">;
     readonly " $refType": "Task_task";
 };
 export type Task_task$data = Task_task;
@@ -45,10 +46,15 @@ const node: ReaderFragment = {
       "kind": "ScalarField",
       "name": "status",
       "storageKey": null
+    },
+    {
+      "args": null,
+      "kind": "FragmentSpread",
+      "name": "Comments_task"
     }
   ],
   "type": "Task",
   "abstractKey": null
 };
-(node as any).hash = '70d4d3692b2f334fdbdbb85c3a07180e';
+(node as any).hash = '82887af6b37c73982c144f7ab736e341';
 export default node;

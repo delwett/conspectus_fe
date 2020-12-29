@@ -24,7 +24,7 @@ type Task {
   id: ID!
   description: String!
   subtasks: [Task]
-  comments: [Comment]
+  comments: [Comment!]!
   status: TaskStatusEnum!
 }
 
