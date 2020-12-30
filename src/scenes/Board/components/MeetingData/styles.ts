@@ -8,7 +8,7 @@ export const Container = styled.div`
 `
 
 export const DatePicker = styled(DatePickerBase)`
-  flex: 0 0 90px;
+  flex: 0 0 100px;
   margin: 0 0 0 24px;
 
   & input {

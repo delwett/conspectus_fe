@@ -1,5 +1,7 @@
 import React, { ReactElement } from 'react'
 import { BrowserRouter } from 'react-router-dom'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import { RelayEnvironmentProvider } from 'relay-hooks'
 import { SnackbarProvider } from 'notistack'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
@@ -21,19 +23,21 @@ export default function App(): ReactElement {
 
   return (
     <BrowserRouter>
-      <RelayEnvironmentProvider environment={environment}>
-        <StylesProvider injectFirst>
-          <ThemeProvider theme={theme}>
-            <SnackbarProvider classes={snackbarStyles} maxSnack={4}>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <ActiveUserProvider>
-                  <RootScene />
-                </ActiveUserProvider>
-              </MuiPickersUtilsProvider>
-            </SnackbarProvider>
-          </ThemeProvider>
-        </StylesProvider>
-      </RelayEnvironmentProvider>
+      <DndProvider backend={HTML5Backend}>
+        <RelayEnvironmentProvider environment={environment}>
+          <StylesProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              <SnackbarProvider classes={snackbarStyles} maxSnack={4}>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <ActiveUserProvider>
+                    <RootScene />
+                  </ActiveUserProvider>
+                </MuiPickersUtilsProvider>
+              </SnackbarProvider>
+            </ThemeProvider>
+          </StylesProvider>
+        </RelayEnvironmentProvider>
+      </DndProvider>
     </BrowserRouter>
   )
 }

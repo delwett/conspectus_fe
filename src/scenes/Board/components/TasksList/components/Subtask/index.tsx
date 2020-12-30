@@ -1,8 +1,10 @@
 import React, { ReactElement, useCallback, useState } from 'react'
+import clsx from 'clsx'
 import { Comment, Edit } from '@material-ui/icons'
 import { IconButton } from '@material-ui/core'
 import { graphql, useFragment } from 'relay-hooks'
 import { Subtask_task$key } from '@/__generated__/Subtask_task.graphql'
+import useDragTask from '../../hooks/useDragTask'
 import Status from '../Status'
 import EditableDescription from '../EditableDescription'
 import DeleteTask from '../DeleteTask'
@@ -10,12 +12,12 @@ import CreateComment from '../CreateComment'
 import Comments from '../Comments'
 import { Container, Entity } from './styles'
 
-type TaskProps = {
+type SubtaskProps = {
   subtask: Subtask_task$key
   onListChanged: () => void
 }
 
-export default function Task(props: TaskProps): ReactElement {
+export default function Subtask(props: SubtaskProps): ReactElement {
   const { subtask, onListChanged } = props
   const fragment = useFragment(subtaskFragment, subtask)
   const { id, description, status } = fragment
@@ -32,8 +34,10 @@ export default function Task(props: TaskProps): ReactElement {
     onListChanged()
   }, [onListChanged])
 
+  const [{ isDragging }, $drag] = useDragTask({ id, canDrag: true })
+
   return (
-    <Container>
+    <Container ref={$drag} className={clsx({ 'is-dragging': isDragging })}>
       <Entity>
         <Status id={id} status={status} />
         <EditableDescription id={id} description={description} isEditing={isEditing} onEdited={handleEdited} />
