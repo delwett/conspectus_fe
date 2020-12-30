@@ -8,8 +8,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  padding: 24px;
-  margin: -24px;
+  padding: 0 24px 24px 24px;
+  margin: 0 -24px -24px -24px;
 
   &.ready {
     background-color: ${rgba(themeBase.palette.success.main, 0.1)};
@@ -17,6 +17,7 @@ export const Container = styled.div`
 `
 
 export const NewTask = styled(Card)`
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   padding: 0 16px;

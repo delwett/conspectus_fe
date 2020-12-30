@@ -1,5 +1,5 @@
 const { resolve } = require('path')
-const { HotModuleReplacementPlugin } = require('webpack')
+const { HotModuleReplacementPlugin, DefinePlugin } = require('webpack')
 const { removeEmpty } = require('webpack-config-utils')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
@@ -56,6 +56,9 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: 'assets/styles.css'
+    }),
+    new DefinePlugin({
+      'process.env.API_ENDPOINT': JSON.stringify(process.env.API_ENDPOINT)
     })
   ],
   optimization: {

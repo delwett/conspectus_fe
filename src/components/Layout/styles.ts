@@ -5,10 +5,11 @@ export const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 `
 
 export const Body = styled.div`
-  height: 100%;
+  flex: 1 1 0;
   display: flex;
   flex-direction: column;
 `

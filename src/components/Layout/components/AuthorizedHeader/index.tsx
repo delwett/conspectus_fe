@@ -7,7 +7,7 @@ import { Title } from './styles'
 
 export default function AuthorizedHeader(): ReactElement {
   return (
-    <AppBar position="sticky">
+    <AppBar position="relative">
       <Toolbar>
         <Title variant="h5" noWrap>
           Conspectus

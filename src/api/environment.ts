@@ -1,8 +1,9 @@
 import { Environment, Network, RecordSource, Store } from 'relay-runtime'
 import { getToken } from '@/utils/auth-tokens'
+import { apiEndpoint } from '@/config'
 
 async function fetchQuery(operation: any, variables: any): Promise<any> {
-  return fetch('http://localhost:8000/graphql', {
+  return fetch(apiEndpoint, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
