@@ -43,11 +43,22 @@ fragment MeetingData_board on Board {
   meetingDate
 }
 
+fragment Subtask_task on Task {
+  id
+  description
+  status
+  ...Comments_task
+}
+
 fragment Task_task on Task {
   id
   description
   status
   ...Comments_task
+  subtasks {
+    id
+    ...Subtask_task
+  }
 }
 
 fragment TasksList_board on Board {
@@ -64,6 +75,39 @@ var v0 = {
   "args": null,
   "kind": "ScalarField",
   "name": "id",
+  "storageKey": null
+},
+v1 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "description",
+  "storageKey": null
+},
+v2 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "status",
+  "storageKey": null
+},
+v3 = {
+  "alias": null,
+  "args": null,
+  "concreteType": "Comment",
+  "kind": "LinkedField",
+  "name": "comments",
+  "plural": true,
+  "selections": [
+    (v0/*: any*/),
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "text",
+      "storageKey": null
+    }
+  ],
   "storageKey": null
 };
 return {
@@ -135,36 +179,21 @@ return {
             "plural": true,
             "selections": [
               (v0/*: any*/),
+              (v1/*: any*/),
+              (v2/*: any*/),
+              (v3/*: any*/),
               {
                 "alias": null,
                 "args": null,
-                "kind": "ScalarField",
-                "name": "description",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "status",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "Comment",
+                "concreteType": "Task",
                 "kind": "LinkedField",
-                "name": "comments",
+                "name": "subtasks",
                 "plural": true,
                 "selections": [
                   (v0/*: any*/),
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "text",
-                    "storageKey": null
-                  }
+                  (v1/*: any*/),
+                  (v2/*: any*/),
+                  (v3/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -177,12 +206,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "518455d7aa2545992a1e0270ca330e44",
+    "cacheID": "ff1282a812229d25d95f871ed8010d8c",
     "id": null,
     "metadata": {},
     "name": "BoardQuery",
     "operationKind": "query",
-    "text": "query BoardQuery {\n  getCurrentBoard {\n    id\n    ...MeetingData_board\n    ...TasksList_board\n    ...MeetingControls_board\n  }\n}\n\nfragment Comments_task on Task {\n  comments {\n    id\n    text\n  }\n}\n\nfragment MeetingControls_board on Board {\n  meetingDate\n}\n\nfragment MeetingData_board on Board {\n  meetingDate\n}\n\nfragment Task_task on Task {\n  id\n  description\n  status\n  ...Comments_task\n}\n\nfragment TasksList_board on Board {\n  tasks {\n    id\n    ...Task_task\n  }\n}\n"
+    "text": "query BoardQuery {\n  getCurrentBoard {\n    id\n    ...MeetingData_board\n    ...TasksList_board\n    ...MeetingControls_board\n  }\n}\n\nfragment Comments_task on Task {\n  comments {\n    id\n    text\n  }\n}\n\nfragment MeetingControls_board on Board {\n  meetingDate\n}\n\nfragment MeetingData_board on Board {\n  meetingDate\n}\n\nfragment Subtask_task on Task {\n  id\n  description\n  status\n  ...Comments_task\n}\n\nfragment Task_task on Task {\n  id\n  description\n  status\n  ...Comments_task\n  subtasks {\n    id\n    ...Subtask_task\n  }\n}\n\nfragment TasksList_board on Board {\n  tasks {\n    id\n    ...Task_task\n  }\n}\n"
   }
 };
 })();

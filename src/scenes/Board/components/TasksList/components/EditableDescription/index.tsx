@@ -54,6 +54,7 @@ export default function EditableDescription(props: EditableDescriptionProps): Re
           value={newDescription}
           fullWidth
           required
+          autoFocus
           disabled={loading}
           onChange={handleChange}
           startAdornment={

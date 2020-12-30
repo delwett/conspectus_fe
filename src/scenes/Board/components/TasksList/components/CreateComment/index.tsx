@@ -47,6 +47,7 @@ export default function CreateComment(props: CreateCommentProps): ReactElement {
         value={text}
         fullWidth
         required
+        autoFocus
         disabled={loading}
         onChange={handleChange}
         startAdornment={

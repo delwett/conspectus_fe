@@ -23,7 +23,7 @@ scalar Date
 type Task {
   id: ID!
   description: String!
-  subtasks: [Task]
+  subtasks: [Task!]!
   comments: [Comment!]!
   status: TaskStatusEnum!
 }

@@ -8,12 +8,13 @@ import useToasts from '@/hooks/useToast'
 import { Form, FakeSubmit } from './styles'
 
 type CreateTaskProps = {
+  className?: string
   parentId: string | null
   onCreated: () => void
 }
 
 export default function CreateTask(props: CreateTaskProps): ReactElement {
-  const { parentId, onCreated } = props
+  const { className, parentId, onCreated } = props
   const { showToast } = useToasts()
 
   const [description, setDescription] = useState('')
@@ -42,11 +43,12 @@ export default function CreateTask(props: CreateTaskProps): ReactElement {
   )
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form className={className} onSubmit={handleSubmit}>
       <Input
         value={description}
         fullWidth
         required
+        autoFocus
         disabled={loading}
         onChange={handleChange}
         startAdornment={

@@ -9,6 +9,10 @@ export type Task_task = {
     readonly id: string;
     readonly description: string;
     readonly status: TaskStatusEnum;
+    readonly subtasks: ReadonlyArray<{
+        readonly id: string;
+        readonly " $fragmentRefs": FragmentRefs<"Subtask_task">;
+    }>;
     readonly " $fragmentRefs": FragmentRefs<"Comments_task">;
     readonly " $refType": "Task_task";
 };
@@ -20,19 +24,21 @@ export type Task_task$key = {
 
 
 
-const node: ReaderFragment = {
+const node: ReaderFragment = (function(){
+var v0 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "id",
+  "storageKey": null
+};
+return {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
   "name": "Task_task",
   "selections": [
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "id",
-      "storageKey": null
-    },
+    (v0/*: any*/),
     {
       "alias": null,
       "args": null,
@@ -48,6 +54,23 @@ const node: ReaderFragment = {
       "storageKey": null
     },
     {
+      "alias": null,
+      "args": null,
+      "concreteType": "Task",
+      "kind": "LinkedField",
+      "name": "subtasks",
+      "plural": true,
+      "selections": [
+        (v0/*: any*/),
+        {
+          "args": null,
+          "kind": "FragmentSpread",
+          "name": "Subtask_task"
+        }
+      ],
+      "storageKey": null
+    },
+    {
       "args": null,
       "kind": "FragmentSpread",
       "name": "Comments_task"
@@ -56,5 +79,6 @@ const node: ReaderFragment = {
   "type": "Task",
   "abstractKey": null
 };
-(node as any).hash = '82887af6b37c73982c144f7ab736e341';
+})();
+(node as any).hash = '01bae9022ff4f84bd9cfee761e0b0548';
 export default node;
